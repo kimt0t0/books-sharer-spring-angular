@@ -1,19 +1,20 @@
 package com.kimdev.bookssharer.models;
 
-import org.hibernate.annotations.GenericGenerator;
-
 /**
  * @author: Kim Robert
  * @since: 05.01.2024
  */
+
+import java.util.List;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -34,9 +35,8 @@ public class User {
     @Column(unique = true, nullable = false)
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "id_role")
-    private Role role;
+    @OneToMany(mappedBy = "owner")
+    private List<Book> books;
 
     public User() {
 
