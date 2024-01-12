@@ -12,7 +12,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
+@Data
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
 public class Settings {
 
@@ -28,5 +35,15 @@ public class Settings {
 
     @Column(nullable = false)
     private List<String> readingLanguages;
+
+    public Settings() {
+
+    }
+
+    public Settings(Boolean darkmode, String language, List<String> readingLanguages) {
+        this.darkmode = darkmode;
+        this.language = language;
+        this.readingLanguages = readingLanguages;
+    }
 
 }
