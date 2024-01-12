@@ -50,7 +50,7 @@ public class User extends AbstractEntity {
 
     @OneToMany
     @JoinColumn(name = "id_contacts")
-    private List<User> contactsList;
+    private List<User> contacts;
 
     @OneToMany(mappedBy = "owner")
     private List<Book> books;
