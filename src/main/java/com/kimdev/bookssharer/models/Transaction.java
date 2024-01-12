@@ -5,7 +5,6 @@ package com.kimdev.bookssharer.models;
  * @since: 05.01.2024
  */
 
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.type.descriptor.java.ZonedDateTimeJavaType;
 
 import com.kimdev.bookssharer.enums.TransactionState;
@@ -13,33 +12,29 @@ import com.kimdev.bookssharer.enums.TransactionType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "transactions")
-public class Transaction {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
-    private String id;
+public class Transaction extends AbstractEntity {
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private TransactionType type;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private TransactionState state;
 
     @ManyToOne
